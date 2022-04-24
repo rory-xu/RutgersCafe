@@ -30,6 +30,6 @@ public class CakeDonut extends Donut {
 	 */
 	@Override
 	public String toString() {
-		return flavor + "(" + quantity + ")";
+		return "Cake Donut: " + flavor + "(" + quantity + ")";
 	}
 }

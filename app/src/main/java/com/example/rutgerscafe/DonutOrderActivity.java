@@ -56,7 +56,17 @@ public class DonutOrderActivity extends AppCompatActivity{
             public void afterTextChanged(Editable editable) {
                 subtotal = findViewById(R.id.tv_subtotal);
                 try {
-                    subtotal.setText("$" + df.format(1.69 * Integer.parseInt(String.valueOf(quantity.getText()))));
+                    switch (String.valueOf(type.getText())) {
+                        case "Yeast Donut":
+                            subtotal.setText("$" + df.format(1.59 * Integer.parseInt(String.valueOf(quantity.getText()))));
+                            break;
+                        case "Cake Donut":
+                            subtotal.setText("$" + df.format(1.79 * Integer.parseInt(String.valueOf(quantity.getText()))));
+                            break;
+                        case "Donut Hole":
+                            subtotal.setText("$" + df.format(0.39 * Integer.parseInt(String.valueOf(quantity.getText()))));
+                            break;
+                    }
                 } catch (NumberFormatException e) {
                     subtotal.setText("$0.00");
                 }
@@ -65,7 +75,6 @@ public class DonutOrderActivity extends AppCompatActivity{
 
         addToOrder = findViewById(R.id.btn_addDonutOrder);
         addToOrder.setOnClickListener(view -> {
-            MainActivity.currOrder = new Order(MainActivity.orderNumber);
             switch (String.valueOf(type.getText())) {
                 case "Yeast Donut":
                     MainActivity.currOrder.add(new YeastDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));

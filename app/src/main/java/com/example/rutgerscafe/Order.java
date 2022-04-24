@@ -35,6 +35,18 @@ public class Order implements com.example.rutgerscafe.Customizable {
 	}
 
 	/**
+	 * Retrieves the subtotal of the items in the order
+	 * @return The subtotal of all the items in the order
+	 */
+	public double getSubtotal() {
+		double subtotal = 0;
+		for (MenuItem item : items) {
+			subtotal += item.itemPrice();
+		}
+		return subtotal;
+	}
+
+	/**
 	 * Adds a MenuItem to the list of MenuItems
 	 * @param obj The MenuItem to be added
 	 * @return True if successful, false if not

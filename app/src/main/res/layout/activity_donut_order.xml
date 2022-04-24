@@ -57,12 +57,13 @@
         android:layout_width="60dp"
         android:layout_height="48dp"
         android:layout_marginTop="-10dp"
+        android:autofillHints="1"
         android:ems="10"
+        android:hint="@string/number_of_coffee"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:autofillHints="1" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView5"

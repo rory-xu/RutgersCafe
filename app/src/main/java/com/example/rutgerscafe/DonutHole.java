@@ -30,6 +30,6 @@ public class DonutHole extends Donut {
 	 */
 	@Override
 	public String toString() {
-		return flavor + "(" + quantity + ")";
+		return "Donut Hole: " + flavor + "(" + quantity + ")";
 	}
 }
