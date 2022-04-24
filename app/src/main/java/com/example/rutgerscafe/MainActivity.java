@@ -12,7 +12,10 @@ public class MainActivity extends AppCompatActivity{
     private ImageButton coffeeButton;
     private ImageButton cartButton;
     private ImageButton storeButton;
+    public static int orderNumber = 1;
     public static List<MenuItem> items = new ArrayList<>();
+    public static List<Order> storeOrders = new ArrayList<>();
+    public static Order currOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
@@ -64,6 +65,20 @@ public class DonutOrderActivity extends AppCompatActivity{
 
         addToOrder = findViewById(R.id.btn_addDonutOrder);
         addToOrder.setOnClickListener(view -> {
+            MainActivity.currOrder = new Order(MainActivity.orderNumber);
+            switch (String.valueOf(type.getText())) {
+                case "Yeast Donut":
+                    MainActivity.currOrder.add(new YeastDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                    break;
+                case "Cake Donut":
+                    MainActivity.currOrder.add(new CakeDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                    break;
+                case "Donut Hole":
+                    MainActivity.currOrder.add(new DonutHole(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                    break;
+            }
+            Toast toast = Toast.makeText(this, "Donut Successfully Added!", Toast.LENGTH_LONG);
+            toast.show();
 
         });
 

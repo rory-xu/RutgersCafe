@@ -3,10 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/elect/AndroidStudioProjects/RutgersCafe/app/src/main/res/layout/activity_cart.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/elect/AndroidStudioProjects/RutgersCafe/app/src/main/res/layout/activity_cart.xml" value="0.25" />
         <entry key="..\:/Users/elect/AndroidStudioProjects/RutgersCafe/app/src/main/res/layout/activity_coffee.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/elect/AndroidStudioProjects/RutgersCafe/app/src/main/res/layout/activity_donut.xml" value="0.33" />
-        <entry key="..\:/Users/elect/AndroidStudioProjects/RutgersCafe/app/src/main/res/layout/activity_donut_order.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/elect/AndroidStudioProjects/RutgersCafe/app/src/main/res/layout/activity_donut_order.xml" value="0.33" />
         <entry key="..\:/Users/elect/AndroidStudioProjects/RutgersCafe/app/src/main/res/layout/activity_main.xml" value="0.21875" />
         <entry key="..\:/Users/elect/AndroidStudioProjects/RutgersCafe/app/src/main/res/layout/donut_flavor_layout.xml" value="0.38697916666666665" />
       </map>

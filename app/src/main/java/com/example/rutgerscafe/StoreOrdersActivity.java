@@ -9,7 +9,6 @@ import java.util.List;
 
 public class StoreOrdersActivity extends AppCompatActivity {
 
-    public static List<Order> allOrders = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

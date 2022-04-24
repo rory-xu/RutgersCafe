@@ -14,6 +14,12 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="selected_type">Selected Type:</string>
     <string name="subtotal">Subtotal:</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="submit_order">Submit Order</string>
+    <string name="coffee_and_donut">Coffee and Donut</string>
+    <string name="tax_6_625">Tax (6.625%):</string>
+    <string name="textview">TextView</string>
+    <string name="grand_total">Grand Total:</string>
     <string-array name="donut_types">
         <item>Yeast Donut</item>
         <item>Cake Donut</item>
