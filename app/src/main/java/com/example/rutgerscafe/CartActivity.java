@@ -1,20 +1,13 @@
 package com.example.rutgerscafe;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 
 public class CartActivity extends AppCompatActivity {
@@ -50,7 +43,6 @@ public class CartActivity extends AppCompatActivity {
                             updateTotals();
                         })
                         .setNegativeButton("No", (dialogInterface, i) -> {
-                            return;
                         })
                         .show();
             }

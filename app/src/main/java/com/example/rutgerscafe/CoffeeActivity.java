@@ -96,56 +96,49 @@ public class CoffeeActivity extends AppCompatActivity {
         caramel.setOnClickListener(view -> {
             if (caramel.isChecked()) {
                 currCoffee.add("Caramel");
-                updateSubtotal();
             }
             else {
                 currCoffee.remove("Caramel");
-                updateSubtotal();
             }
+            updateSubtotal();
         });
         cream = findViewById(R.id.cb_cream);
         cream.setOnClickListener(view -> {
-            if (cream.isChecked()) {
-                currCoffee.add("Cream");
-                updateSubtotal();
-            }
-            else {
+            if (!cream.isChecked()) {
                 currCoffee.remove("Cream");
-                updateSubtotal();
+            } else {
+                currCoffee.add("Cream");
             }
+            updateSubtotal();
         });
         milk = findViewById(R.id.cb_milk);
         milk.setOnClickListener(view -> {
             if (milk.isChecked()) {
                 currCoffee.add("Milk");
-                updateSubtotal();
-            }
-            else {
+            } else {
                 currCoffee.remove("Milk");
-                updateSubtotal();
             }
+            updateSubtotal();
         });
         syrup = findViewById(R.id.cb_syrup);
         syrup.setOnClickListener(view -> {
             if (syrup.isChecked()) {
                 currCoffee.add("Syrup");
-                updateSubtotal();
             }
             else {
                 currCoffee.remove("Syrup");
-                updateSubtotal();
             }
+            updateSubtotal();
         });
         whippedCream = findViewById(R.id.cb_whippedcream);
         whippedCream.setOnClickListener(view -> {
             if (whippedCream.isChecked()) {
                 currCoffee.add("Whipped Cream");
-                updateSubtotal();
             }
             else {
                 currCoffee.remove("Whipped Cream");
-                updateSubtotal();
             }
+            updateSubtotal();
         });
         addToOrder = findViewById(R.id.btn_addCoffeeOrder);
         addToOrder.setOnClickListener(view -> {
