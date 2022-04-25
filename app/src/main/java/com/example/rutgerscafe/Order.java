@@ -1,6 +1,5 @@
 package com.example.rutgerscafe;
 
-import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -25,14 +24,6 @@ public class Order implements com.example.rutgerscafe.Customizable{
 	 */
 	public List<MenuItem> getItems() {
 		return items;
-	}
-
-	/**
-	 * Retrieves the order number of the order
-	 * @return The order number of the order
-	 */
-	public int getOrderNumber() {
-		return orderNumber;
 	}
 
 	/**

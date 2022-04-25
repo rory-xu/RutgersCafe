@@ -24,16 +24,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         this.mOnRVListener = onRVListener;
     }
 
-    @NonNull
-    @Override
     /**
      * This method returns the view holder for the Recyclerview
-     * @return holder The view holder for the Recyclerview
+     * @param parent The parent of the view holder
+     * @param viewType Not used
+     * @return A new view holder
      */
+    @NonNull
+    @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.donut_flavor_layout, parent, false);
-        MyViewHolder holder = new MyViewHolder(view, mOnRVListener);
-        return holder;
+        return new MyViewHolder(view, mOnRVListener);
     }
 
     /**
@@ -66,8 +67,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         /**
          * Constructs a view holder for the Recyclerview
-         * @param itemView
-         * @param onRVListener
+         * @param itemView The view holder to be used
+         * @param onRVListener The listener to be binded
          */
         public MyViewHolder(@NonNull View itemView, OnRVListener onRVListener) {
             super(itemView);

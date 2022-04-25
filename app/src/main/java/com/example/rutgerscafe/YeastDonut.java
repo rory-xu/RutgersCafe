@@ -1,9 +1,9 @@
+package com.example.rutgerscafe;
+
 /**
  * A Yeast Donut object with specific flavors
  * @author Rory Xu, Hassan Alfareed
  */
-package com.example.rutgerscafe;
-
 public class YeastDonut extends Donut {
 
 	/**

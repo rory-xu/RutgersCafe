@@ -117,7 +117,7 @@ public class CoffeeActivity extends AppCompatActivity {
 
             /**
              * Detects when the quantity is changed and updates subtotals to reflect the change
-             * @param editable
+             * @param editable Not used
              */
             @Override
             public void afterTextChanged(Editable editable) {
