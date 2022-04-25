@@ -60,24 +60,7 @@ public class CoffeeActivity extends AppCompatActivity {
              */
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (String.valueOf(sizes.getSelectedItem())) {
-                    case "Short":
-                        currCoffee.changeBasePrice(1.69);
-                        updateSubtotal();
-                        break;
-                    case "Tall":
-                        currCoffee.changeBasePrice(2.09);
-                        updateSubtotal();
-                        break;
-                    case "Grande":
-                        currCoffee.changeBasePrice(2.49);
-                        updateSubtotal();
-                        break;
-                    case "Venti":
-                        currCoffee.changeBasePrice(2.89);
-                        updateSubtotal();
-                        break;
-                }
+                changeSize();
             }
 
             /**
@@ -85,10 +68,9 @@ public class CoffeeActivity extends AppCompatActivity {
              * @param adapterView Not used
              */
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) {}
         });
+
         quantity = findViewById(R.id.etn_coffeeQuantity);
         quantity.addTextChangedListener(new TextWatcher() {
             /**
@@ -99,9 +81,7 @@ public class CoffeeActivity extends AppCompatActivity {
              * @param i2 Not used
              */
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             /**
              * Not used
@@ -111,9 +91,7 @@ public class CoffeeActivity extends AppCompatActivity {
              * @param i2 Not used
              */
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             /**
              * Detects when the quantity is changed and updates subtotals to reflect the change
@@ -121,77 +99,32 @@ public class CoffeeActivity extends AppCompatActivity {
              */
             @Override
             public void afterTextChanged(Editable editable) {
-                try {
-                    currCoffee.changeQuantity(Integer.parseInt(String.valueOf(quantity.getText())));
-                    updateSubtotal();
-                }
-                catch (NumberFormatException e) {
-                    subtotal.setText("$0.00");
-                }
+                changeQuantity();
             }
         });
         caramel = findViewById(R.id.cb_caramel);
         caramel.setOnClickListener(view -> {
-            if (caramel.isChecked()) {
-                currCoffee.add("Caramel");
-            }
-            else {
-                currCoffee.remove("Caramel");
-            }
-            updateSubtotal();
+            addAddIn(caramel);
         });
         cream = findViewById(R.id.cb_cream);
         cream.setOnClickListener(view -> {
-            if (!cream.isChecked()) {
-                currCoffee.remove("Cream");
-            } else {
-                currCoffee.add("Cream");
-            }
-            updateSubtotal();
+            addAddIn(cream);
         });
         milk = findViewById(R.id.cb_milk);
         milk.setOnClickListener(view -> {
-            if (milk.isChecked()) {
-                currCoffee.add("Milk");
-            } else {
-                currCoffee.remove("Milk");
-            }
-            updateSubtotal();
+            addAddIn(milk);
         });
         syrup = findViewById(R.id.cb_syrup);
         syrup.setOnClickListener(view -> {
-            if (syrup.isChecked()) {
-                currCoffee.add("Syrup");
-            }
-            else {
-                currCoffee.remove("Syrup");
-            }
-            updateSubtotal();
+            addAddIn(syrup);
         });
         whippedCream = findViewById(R.id.cb_whippedcream);
         whippedCream.setOnClickListener(view -> {
-            if (whippedCream.isChecked()) {
-                currCoffee.add("Whipped Cream");
-            }
-            else {
-                currCoffee.remove("Whipped Cream");
-            }
-            updateSubtotal();
+            addAddIn(whippedCream);
         });
         addToOrder = findViewById(R.id.btn_addCoffeeOrder);
         addToOrder.setOnClickListener(view -> {
-            try {
-                Integer.parseInt(String.valueOf(quantity.getText()));
-                MainActivity.currOrder.add(currCoffee);
-                currCoffee = new Coffee(1.69);
-                resetScreen();
-                Toast toast = Toast.makeText(this, "Coffee Successfully Added!", Toast.LENGTH_LONG);
-                toast.show();
-            }
-            catch (Exception e) {
-                Toast toast = Toast.makeText(this, "Please specify the number of coffees!", Toast.LENGTH_LONG);
-                toast.show();
-            }
+            addCoffee();
         });
     }
 
@@ -222,5 +155,74 @@ public class CoffeeActivity extends AppCompatActivity {
         quantity.setText("");
         currCoffee.changeQuantity(0);
         subtotal.setText("$0.00");
+    }
+
+    /**
+     * Changes the coffee size and the subtotal
+     */
+    private void changeSize() {
+        switch (String.valueOf(sizes.getSelectedItem())) {
+            case "Short":
+                currCoffee.changeBasePrice(1.69);
+                updateSubtotal();
+                break;
+            case "Tall":
+                currCoffee.changeBasePrice(2.09);
+                updateSubtotal();
+                break;
+            case "Grande":
+                currCoffee.changeBasePrice(2.49);
+                updateSubtotal();
+                break;
+            case "Venti":
+                currCoffee.changeBasePrice(2.89);
+                updateSubtotal();
+                break;
+        }
+    }
+
+    /**
+     * Changes the number of coffees requested and the subtotal
+     */
+    private void changeQuantity() {
+        try {
+            currCoffee.changeQuantity(Integer.parseInt(String.valueOf(quantity.getText())));
+            updateSubtotal();
+        }
+        catch (NumberFormatException e) {
+            subtotal.setText("$0.00");
+        }
+    }
+
+    /**
+     * Adds/removes an addin
+     * @param checkBox The addin that was interacted with
+     */
+    private void addAddIn(CheckBox checkBox) {
+        if (checkBox.isChecked()) {
+            currCoffee.add(String.valueOf(checkBox.getText()));
+        }
+        else {
+            currCoffee.remove(String.valueOf(checkBox.getText()));
+        }
+        updateSubtotal();
+    }
+
+    /**
+     * Adds the coffee to the order
+     */
+    private void addCoffee() {
+        try {
+            Integer.parseInt(String.valueOf(quantity.getText()));
+            MainActivity.currOrder.add(currCoffee);
+            currCoffee = new Coffee(1.69);
+            resetScreen();
+            Toast toast = Toast.makeText(this, "Coffee Successfully Added!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        catch (Exception e) {
+            Toast toast = Toast.makeText(this, "Please specify the number of coffees!", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 }

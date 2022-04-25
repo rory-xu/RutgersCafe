@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 public class ViewOrderActivity extends AppCompatActivity {
 
     ListView itemList;
+    TextView orderNumber;
     TextView subtotal;
     TextView tax;
     TextView grandTotal;
@@ -31,6 +32,8 @@ public class ViewOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_order);
         Intent intent = getIntent();
         order = MainActivity.storeOrders.getOrders().get((int) intent.getExtras().get("Selected Order"));
+        orderNumber.findViewById(R.id.tv_orderNumber);
+        orderNumber.setText(order.getOrderNumber());
         itemList = findViewById(R.id.lv_itemList);
         ArrayAdapter<MenuItem> itemsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, order.getItems());

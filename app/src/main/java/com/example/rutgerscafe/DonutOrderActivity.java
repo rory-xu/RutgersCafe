@@ -28,6 +28,7 @@ public class DonutOrderActivity extends AppCompatActivity{
     Button submitOrder;
     Donut selected;
     Intent intent;
+    ArrayAdapter<Donut> donutsAdapter;
     private final DecimalFormat df = new DecimalFormat("#0.00");
 
     /**
@@ -39,7 +40,7 @@ public class DonutOrderActivity extends AppCompatActivity{
         setContentView(R.layout.activity_donut_order);
         intent = getIntent();
         donutOrder = findViewById(R.id.lv_currDonutOrder);
-        ArrayAdapter<Donut> donutsAdapter = new ArrayAdapter<>(this,
+        donutsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, MainActivity.donutOrder);
         donutOrder.setAdapter(donutsAdapter);
         donutOrder.setOnItemClickListener((adapterView, view, i, l) -> selected = (Donut) donutOrder.getItemAtPosition(i));
@@ -47,6 +48,7 @@ public class DonutOrderActivity extends AppCompatActivity{
         type = findViewById(R.id.tv_selectedType);
         quantity = findViewById(R.id.etn_donutQuantity);
         subtotal = findViewById(R.id.tv_donutSubtotal);
+        updateSubtotal();
 
         if (intent != null) {
             flavor.setText(intent.getExtras().getString("Flavor"));
@@ -54,75 +56,94 @@ public class DonutOrderActivity extends AppCompatActivity{
         }
         addToOrder = findViewById(R.id.btn_addDonutOrder);
         addToOrder.setOnClickListener(view -> {
-            try {
-                switch (String.valueOf(type.getText())) {
-                    case "Yeast Donut":
-                        donutsAdapter.add(new YeastDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
-                        donutsAdapter.notifyDataSetChanged();
-                        updateSubtotal();
-                        break;
-                    case "Cake Donut":
-                        donutsAdapter.add(new CakeDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
-                        donutsAdapter.notifyDataSetChanged();
-                        updateSubtotal();
-                        break;
-                    case "Donut Hole":
-                        donutsAdapter.add(new DonutHole(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
-                        donutsAdapter.notifyDataSetChanged();
-                        updateSubtotal();
-                        break;
-                }
-                Toast toast = Toast.makeText(this, "Donut Successfully Added!", Toast.LENGTH_LONG);
-                toast.show();
-            } catch (NumberFormatException e) {
-                Toast toast = Toast.makeText(this, "Please specify the number of donuts!", Toast.LENGTH_LONG);
-                toast.show();
-            }
-
-
+            addDonuts();
         });
 
         deleteDonut = findViewById(R.id.btn_deleteDonut);
         deleteDonut.setOnClickListener(view -> {
-            try {
-                new AlertDialog.Builder(this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage("Are you sure you want to delete this Donut?")
-                        .setTitle("Delete Donut")
-                        .setPositiveButton("Yes", (dialogInterface, i) -> {
-                            donutsAdapter.remove(selected);
-                            donutsAdapter.notifyDataSetChanged();
-                            updateSubtotal();
-                        })
-                        .setNegativeButton("No", (dialogInterface, i) -> {
-                        })
-                        .show();
-            }
-            catch (NullPointerException e) {
-                Toast toast = Toast.makeText(this, "No Donut Selected to Delete", Toast.LENGTH_LONG);
-                toast.show();
-            }
+            deleteSelectedDonut();
         });
 
         submitOrder = findViewById(R.id.btn_submitDonutOrder);
         submitOrder.setOnClickListener(view -> {
-            if (!MainActivity.donutOrder.isEmpty()) {
-                for (Donut donut : MainActivity.donutOrder) {
-                    MainActivity.currOrder.add(donut);
-                }
-                donutsAdapter.clear();
-                donutsAdapter.notifyDataSetChanged();
-                updateSubtotal();
-                Toast toast = Toast.makeText(this, "Donut Order Successfully Placed!", Toast.LENGTH_LONG);
-                toast.show();
-                super.onBackPressed();
-            }
-            else {
-                Toast toast = Toast.makeText(this, "No Donuts in Cart to Order", Toast.LENGTH_LONG);
-                toast.show();
-            }
+            submitDonutOrder();
         });
 
+    }
+
+    /**
+     * Submits the order of donuts to cart
+     */
+    private void submitDonutOrder() {
+        if (!MainActivity.donutOrder.isEmpty()) {
+            for (Donut donut : MainActivity.donutOrder) {
+                MainActivity.currOrder.add(donut);
+            }
+            donutsAdapter.clear();
+            donutsAdapter.notifyDataSetChanged();
+            updateSubtotal();
+            Toast toast = Toast.makeText(this, "Donut Order Successfully Placed!", Toast.LENGTH_LONG);
+            toast.show();
+            super.onBackPressed();
+        }
+        else {
+            Toast toast = Toast.makeText(this, "No Donuts in Cart to Order", Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    /**
+     * Deletes the selected donut
+     */
+    private void deleteSelectedDonut() {
+        try {
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage("Are you sure you want to delete this Donut?")
+                    .setTitle("Delete Donut")
+                    .setPositiveButton("Yes", (dialogInterface, i) -> {
+                        donutsAdapter.remove(selected);
+                        donutsAdapter.notifyDataSetChanged();
+                        updateSubtotal();
+                    })
+                    .setNegativeButton("No", (dialogInterface, i) -> {
+                    })
+                    .show();
+        }
+        catch (NullPointerException e) {
+            Toast toast = Toast.makeText(this, "No Donut Selected to Delete", Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    /**
+     * Adds the donuts in the list to the cart
+     */
+    private void addDonuts() {
+        try {
+            switch (String.valueOf(type.getText())) {
+                case "Yeast Donut":
+                    donutsAdapter.add(new YeastDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                    donutsAdapter.notifyDataSetChanged();
+                    updateSubtotal();
+                    break;
+                case "Cake Donut":
+                    donutsAdapter.add(new CakeDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                    donutsAdapter.notifyDataSetChanged();
+                    updateSubtotal();
+                    break;
+                case "Donut Hole":
+                    donutsAdapter.add(new DonutHole(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                    donutsAdapter.notifyDataSetChanged();
+                    updateSubtotal();
+                    break;
+            }
+            Toast toast = Toast.makeText(this, "Donut Successfully Added!", Toast.LENGTH_LONG);
+            toast.show();
+        } catch (NumberFormatException e) {
+            Toast toast = Toast.makeText(this, "Please specify the number of donuts!", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     /**

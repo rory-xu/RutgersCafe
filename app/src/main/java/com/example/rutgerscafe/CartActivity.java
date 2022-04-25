@@ -23,6 +23,7 @@ public class CartActivity extends AppCompatActivity {
     Button deleteItem;
     Button submitOrder;
     MenuItem selected;
+    ArrayAdapter itemsAdapter;
     private final DecimalFormat df = new DecimalFormat("#0.00");
 
     /**
@@ -34,12 +35,49 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         itemList = findViewById(R.id.lv_itemList);
-        ArrayAdapter<MenuItem> itemsAdapter = new ArrayAdapter<>(this,
+        itemsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, MainActivity.currOrder.getItems());
         itemList.setAdapter(itemsAdapter);
         itemList.setOnItemClickListener((adapterView, view, i, l) -> selected = (MenuItem) itemList.getItemAtPosition(i));
         deleteItem = findViewById(R.id.btn_deleteItem);
         deleteItem.setOnClickListener(view -> {
+            deleteItem();
+        });
+        submitOrder = findViewById(R.id.btn_submitOrder);
+        submitOrder.setOnClickListener(view -> {
+            submit();
+        });
+        subtotal = findViewById(R.id.tv_orderSubtotal);
+        tax = findViewById(R.id.tv_orderTax);
+        grandTotal = findViewById(R.id.tv_orderGrandTotal);
+        updateTotals();
+    }
+
+    /**
+     * Submits the cart to store orders
+     */
+    private void submit() {
+        if (!MainActivity.currOrder.getItems().isEmpty()) {
+            MainActivity.storeOrders.add(MainActivity.currOrder);
+            MainActivity.orderNumber++;
+            MainActivity.currOrder = new Order(MainActivity.orderNumber);
+            itemsAdapter.notifyDataSetChanged();
+            updateTotals();
+            Toast toast = Toast.makeText(this, "Order Successfully Placed!", Toast.LENGTH_LONG);
+            toast.show();
+            super.onBackPressed();
+        }
+        else {
+            Toast toast = Toast.makeText(this, "No Items in Cart to Order", Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    /**
+     * Deletes the item from the order list
+     */
+    private void deleteItem() {
+        if (!itemsAdapter.isEmpty()) {
             try {
                 new AlertDialog.Builder(this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -58,28 +96,12 @@ public class CartActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "No Item Selected to Delete", Toast.LENGTH_LONG);
                 toast.show();
             }
-        });
-        submitOrder = findViewById(R.id.btn_submitOrder);
-        submitOrder.setOnClickListener(view -> {
-            if (!MainActivity.currOrder.getItems().isEmpty()) {
-                MainActivity.storeOrders.add(MainActivity.currOrder);
-                MainActivity.orderNumber++;
-                MainActivity.currOrder = new Order(MainActivity.orderNumber);
-                itemsAdapter.notifyDataSetChanged();
-                updateTotals();
-                Toast toast = Toast.makeText(this, "Order Successfully Placed!", Toast.LENGTH_LONG);
-                toast.show();
-                super.onBackPressed();
-            }
-            else {
-                Toast toast = Toast.makeText(this, "No Items in Cart to Order", Toast.LENGTH_LONG);
-                toast.show();
-            }
-        });
-        subtotal = findViewById(R.id.tv_orderSubtotal);
-        tax = findViewById(R.id.tv_orderTax);
-        grandTotal = findViewById(R.id.tv_orderGrandTotal);
-        updateTotals();
+        }
+        else {
+            Toast toast = Toast.makeText(this, "There are no items to delete", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
     }
 
     /**

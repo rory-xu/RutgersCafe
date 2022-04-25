@@ -27,6 +27,14 @@ public class Order implements com.example.rutgerscafe.Customizable{
 	}
 
 	/**
+	 * Retrieves the order number of the order
+	 * @return The order number
+	 */
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+
+	/**
 	 * Retrieves the subtotal of the items in the order
 	 * @return The subtotal of all the items in the order
 	 */
