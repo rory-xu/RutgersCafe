@@ -8,6 +8,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.DecimalFormat;
 
+/**
+ * This class controls the functionality of the view order activity
+ * @author Rory Xu, Hassan Alfareed
+ */
 public class ViewOrderActivity extends AppCompatActivity {
 
     ListView itemList;
@@ -17,6 +21,10 @@ public class ViewOrderActivity extends AppCompatActivity {
     Order order;
     private final DecimalFormat df = new DecimalFormat("#0.00");
 
+    /**
+     * Initializes elements of the view order activity and defines their functionalities
+     * @param savedInstanceState Not used
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +41,9 @@ public class ViewOrderActivity extends AppCompatActivity {
         updateTotals();
     }
 
+    /**
+     * Updates the monetary values on the view order activity
+     */
     private void updateTotals() {
         double st = order.getSubtotal();
         subtotal.setText("$" + df.format(st));

@@ -17,6 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 
+/**
+ * This class controls the functionality of the coffee activity
+ * @author Rory Xu, Hassan Alfareed
+ */
 public class CoffeeActivity extends AppCompatActivity {
 
     CheckBox caramel;
@@ -32,6 +36,11 @@ public class CoffeeActivity extends AppCompatActivity {
     Coffee currCoffee = new Coffee(1.69);
     private final DecimalFormat df = new DecimalFormat("#0.00");
 
+
+    /**
+     * Initializes elements of the coffee activity and defines their functionalities
+     * @param savedInstanceState Not used
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +51,13 @@ public class CoffeeActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item);
         sizes.setAdapter(coffeeSizeAdapter);
         sizes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * Changes the price of the coffee when the size is changed
+             * @param adapterView Not used
+             * @param view Not used
+             * @param i Not used
+             * @param l Not used
+             */
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (String.valueOf(sizes.getSelectedItem())) {
@@ -64,6 +80,10 @@ public class CoffeeActivity extends AppCompatActivity {
                 }
             }
 
+            /**
+             * Not used
+             * @param adapterView Not used
+             */
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -71,16 +91,34 @@ public class CoffeeActivity extends AppCompatActivity {
         });
         quantity = findViewById(R.id.etn_coffeeQuantity);
         quantity.addTextChangedListener(new TextWatcher() {
+            /**
+             * Not used
+             * @param charSequence Not used
+             * @param i Not used
+             * @param i1 Not used
+             * @param i2 Not used
+             */
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
+            /**
+             * Not used
+             * @param charSequence Not used
+             * @param i Not used
+             * @param i1 Not used
+             * @param i2 Not used
+             */
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
+            /**
+             * Detects when the quantity is changed and updates subtotals to reflect the change
+             * @param editable
+             */
             @Override
             public void afterTextChanged(Editable editable) {
                 try {
@@ -157,6 +195,9 @@ public class CoffeeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates the monetary values on the coffee activity
+     */
     private void updateSubtotal() {
         try {
             Integer.parseInt(String.valueOf(quantity.getText()));
@@ -168,6 +209,9 @@ public class CoffeeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Resets the screen upon submitting a coffee item
+     */
     private void resetScreen() {
         caramel.setChecked(false);
         cream.setChecked(false);

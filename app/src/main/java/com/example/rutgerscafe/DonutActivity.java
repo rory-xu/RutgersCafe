@@ -4,13 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.*;
 
+/**
+ * This class controls the functionality of the donut activity
+ * @author Rory Xu, Hassan Alfareed
+ */
 public class DonutActivity extends AppCompatActivity implements OnRVListener{
     Spinner donutTypes;
     ArrayAdapter<CharSequence> donutTypeAdapter;
@@ -22,7 +24,10 @@ public class DonutActivity extends AppCompatActivity implements OnRVListener{
             "Plain", "Ube", "Swirl"));
 
 
-
+    /**
+     * Initializes elements of the donut activity and defines their functionalities
+     * @param savedInstanceState Not used
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,10 @@ public class DonutActivity extends AppCompatActivity implements OnRVListener{
         flavorRecyclerView.setAdapter(flavorRVAdapter);
     }
 
+    /**
+     * Launches the donut order activity upon selecting a flavor on the list of flavors
+     * @param position The position of the flavor selected
+     */
     @Override
     public void onRVClick(int position) {
         Intent intent = new Intent(this, DonutOrderActivity.class);

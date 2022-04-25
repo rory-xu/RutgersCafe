@@ -9,6 +9,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * This class controls the functionality of the store orders activity
+ * @author Rory Xu, Hassan Alfareed
+ */
 public class StoreOrdersActivity extends AppCompatActivity {
 
     ListView storeOrdersList;
@@ -16,6 +20,10 @@ public class StoreOrdersActivity extends AppCompatActivity {
     Button deleteOrder;
     int selected;
 
+    /**
+     * Initializes elements of the store orders activity and defines their functionalities
+     * @param savedInstanceState Not used
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -10,6 +10,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.DecimalFormat;
 
+/**
+ * This class controls the functionality of the Cart page
+ * @author Rory Xu, Hassan Alfareed
+ */
 public class CartActivity extends AppCompatActivity {
 
     ListView itemList;
@@ -21,6 +25,10 @@ public class CartActivity extends AppCompatActivity {
     MenuItem selected;
     private final DecimalFormat df = new DecimalFormat("#0.00");
 
+    /**
+     * Initializes elements of the cart activity and defines their functionalities
+     * @param savedInstanceState Not used
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +82,9 @@ public class CartActivity extends AppCompatActivity {
         updateTotals();
     }
 
+    /**
+     * Updates the monetary values on the cart activity
+     */
     private void updateTotals() {
         double st = MainActivity.currOrder.getSubtotal();
         subtotal.setText("$" + df.format(st));

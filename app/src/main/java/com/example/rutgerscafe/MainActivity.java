@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.*;
 
+/**
+ * This class determines the functionality of the main store front activity
+ */
 public class MainActivity extends AppCompatActivity{
 
     private ImageButton donutButton;
@@ -14,7 +18,12 @@ public class MainActivity extends AppCompatActivity{
     public static int orderNumber = 1;
     public static StoreOrders storeOrders = new StoreOrders();
     public static Order currOrder = new Order(MainActivity.orderNumber);
+    public static List<Donut> donutOrder = new ArrayList<>();
 
+    /**
+     * Initializes elements of the store front activity and defines their functionalities
+     * @param savedInstanceState Not used
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
