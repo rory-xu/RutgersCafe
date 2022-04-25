@@ -1,12 +1,13 @@
 package com.example.rutgerscafe;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * This class creates an order that contains MenuItems
  * @author Rory Xu, Hassan Alfareed
  */
-public class Order implements com.example.rutgerscafe.Customizable {
+public class Order implements com.example.rutgerscafe.Customizable, Serializable {
 	private final int orderNumber;
 	private List<MenuItem> items= new ArrayList<>();
 

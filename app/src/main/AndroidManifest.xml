@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RutgersCafe">
         <activity
+            android:name=".ViewOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".DonutOrderActivity"
             android:exported="false" />
         <activity

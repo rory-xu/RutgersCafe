@@ -75,19 +75,25 @@ public class DonutOrderActivity extends AppCompatActivity{
 
         addToOrder = findViewById(R.id.btn_addDonutOrder);
         addToOrder.setOnClickListener(view -> {
-            switch (String.valueOf(type.getText())) {
-                case "Yeast Donut":
-                    MainActivity.currOrder.add(new YeastDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
-                    break;
-                case "Cake Donut":
-                    MainActivity.currOrder.add(new CakeDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
-                    break;
-                case "Donut Hole":
-                    MainActivity.currOrder.add(new DonutHole(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
-                    break;
+            try {
+                switch (String.valueOf(type.getText())) {
+                    case "Yeast Donut":
+                        MainActivity.currOrder.add(new YeastDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                        break;
+                    case "Cake Donut":
+                        MainActivity.currOrder.add(new CakeDonut(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                        break;
+                    case "Donut Hole":
+                        MainActivity.currOrder.add(new DonutHole(flavor.getText().toString(), Integer.parseInt(quantity.getText().toString())));
+                        break;
+                }
+                Toast toast = Toast.makeText(this, "Donut Successfully Added!", Toast.LENGTH_LONG);
+                toast.show();
+            } catch (NumberFormatException e) {
+                Toast toast = Toast.makeText(this, "Please specify the number of donuts!", Toast.LENGTH_LONG);
+                toast.show();
             }
-            Toast toast = Toast.makeText(this, "Donut Successfully Added!", Toast.LENGTH_LONG);
-            toast.show();
+
 
         });
 

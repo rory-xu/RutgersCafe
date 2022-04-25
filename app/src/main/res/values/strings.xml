@@ -28,9 +28,20 @@
     <string name="whipped_cream">Whipped Cream</string>
     <string name="coffee_size">Size</string>
     <string name="number_of_coffee">#</string>
+    <string name="button">Button</string>
+    <string name="view_order">View Order</string>
+    <string name="delete_order">Delete Order</string>
+    <string name="ordernum">Order#</string>
     <string-array name="donut_types">
         <item>Yeast Donut</item>
         <item>Cake Donut</item>
         <item>Donut Hole</item>
+    </string-array>
+    ]
+    <string-array name="coffee_sizes">
+        <item>Short</item>
+        <item>Tall</item>
+        <item>Grande</item>
+        <item>Venti</item>
     </string-array>
 </resources>

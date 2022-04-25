@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity{
     private ImageButton cartButton;
     private ImageButton storeButton;
     public static int orderNumber = 1;
-    public static List<Order> storeOrders = new ArrayList<>();
+    public static StoreOrders storeOrders = new StoreOrders();
     public static Order currOrder = new Order(MainActivity.orderNumber);
 
     @Override

@@ -27,11 +27,11 @@ public class DonutActivity extends AppCompatActivity implements OnRVListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donut);
-        donutTypes = (Spinner) findViewById(R.id.donutType);
+        donutTypes = (Spinner) findViewById(R.id.sp_donutType);
         donutTypeAdapter = ArrayAdapter.createFromResource(this, R.array.donut_types,
                 android.R.layout.simple_spinner_dropdown_item);
         donutTypes.setAdapter(donutTypeAdapter);
-        flavorRecyclerView = (RecyclerView) findViewById(R.id.donut_flavor_list);
+        flavorRecyclerView = (RecyclerView) findViewById(R.id.rv_donutFlavorList);
         flavorRecyclerView.setHasFixedSize(true);
         flavorRVLayoutManager = new LinearLayoutManager(this);
         flavorRecyclerView.setLayoutManager((flavorRVLayoutManager));

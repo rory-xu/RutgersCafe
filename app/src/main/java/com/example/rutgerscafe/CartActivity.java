@@ -1,5 +1,7 @@
 package com.example.rutgerscafe;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.reflect.Array;
@@ -30,24 +33,46 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         itemList = findViewById(R.id.lv_itemList);
-        ArrayAdapter<MenuItem> itemsAdapter = new ArrayAdapter<MenuItem>(this,
+        ArrayAdapter<MenuItem> itemsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, MainActivity.currOrder.getItems());
         itemList.setAdapter(itemsAdapter);
-        itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selected = (MenuItem) itemList.getItemAtPosition(i);
-            }
-        });
+        itemList.setOnItemClickListener((adapterView, view, i, l) -> selected = (MenuItem) itemList.getItemAtPosition(i));
         deleteItem = findViewById(R.id.btn_deleteItem);
         deleteItem.setOnClickListener(view -> {
             try {
-                itemsAdapter.remove(selected);
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setMessage("Are you sure you want to delete this item?")
+                        .setTitle("Delete Item")
+                        .setPositiveButton("Yes", (dialogInterface, i) -> {
+                            itemsAdapter.remove(selected);
+                            itemsAdapter.notifyDataSetChanged();
+                            updateTotals();
+                        })
+                        .setNegativeButton("No", (dialogInterface, i) -> {
+                            return;
+                        })
+                        .show();
+            }
+            catch (NullPointerException e) {
+                Toast toast = Toast.makeText(this, "No Item Selected to Delete", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });
+        submitOrder = findViewById(R.id.btn_submitOrder);
+        submitOrder.setOnClickListener(view -> {
+            if (!MainActivity.currOrder.getItems().isEmpty()) {
+                MainActivity.storeOrders.add(MainActivity.currOrder);
+                MainActivity.orderNumber++;
+                MainActivity.currOrder = new Order(MainActivity.orderNumber);
                 itemsAdapter.notifyDataSetChanged();
                 updateTotals();
-            } catch (NullPointerException e) {
-                Toast toast = Toast.makeText(this, "No Item Selected to Delete", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Order Successfully Placed!", Toast.LENGTH_LONG);
+                toast.show();
+                super.onBackPressed();
+            }
+            else {
+                Toast toast = Toast.makeText(this, "No Items in Cart to Order", Toast.LENGTH_LONG);
                 toast.show();
             }
         });
